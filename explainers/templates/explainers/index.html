@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Explainer</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Code Explainer</h1>
+            <p class="subtitle">Get explanations, error checks, and improved code for your Python or C++ snippets</p>
+        </header>
+
+        <div class="usage-note">
+            <p>⚠️ <strong>Note:</strong> Maximum 500 lines or 20 KB per request</p>
+        </div>
+
+        <div class="main-content">
+            <!-- LEFT COLUMN: Input Section -->
+            <div class="input-section">
+                <div class="controls">
+                    <label for="language-select">Language:</label>
+                    <select id="language-select" aria-label="Select programming language">
+                        <option value="python">Python</option>
+                        <option value="cpp">C++</option>
+                    </select>
+                    <button id="explain-btn" class="btn btn-primary" type="button" aria-label="Explain code">Explain</button>
+                    <button id="improve-btn" class="btn btn-secondary" type="button" aria-label="Improve code">Improve</button>
+                </div>
+                <textarea id="code-editor" placeholder="Paste your code here..." aria-label="Code editor"></textarea>
+            </div>
+
+            <!-- RIGHT COLUMN: Results Section -->
+            <div class="results-section" id="results-section" style="display: none;" role="region" aria-label="Code explanation results">
+                <div class="loading" id="loading" style="display: none;" role="status" aria-live="polite">
+                    <div class="spinner" aria-hidden="true"></div>
+                    <p>Processing your code...</p>
+                </div>
+
+                <div class="result-panel" id="result-panel">
+                    <div class="result-item">
+                        <h3>Explanation</h3>
+                        <div class="result-content" id="explanation" role="article"></div>
+                    </div>
+                    <div class="result-item">
+                        <h3>Potential Errors/Warnings</h3>
+                        <div class="result-content" id="errors" role="article"></div>
+                    </div>
+                    <div class="result-item">
+                        <h3>Improved Code</h3>
+                        <div class="result-content">
+                            <button id="copy-btn" class="btn btn-small" type="button" aria-label="Copy improved code">Copy</button>
+                            <pre><code id="improved-code"></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message" id="error-message" style="display: none;" role="alert" aria-live="assertive"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
